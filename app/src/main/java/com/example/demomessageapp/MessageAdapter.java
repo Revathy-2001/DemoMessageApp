@@ -4,22 +4,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class MessageAdapter extends ListAdapter<Message,RecyclerView.ViewHolder> {
+
     List<Message> messageList = new ArrayList<>();
     LayoutInflater layoutInflater;
     View view;
     static final int LEFT_MESSAGE_TYPE = 1;
     static final int RIGHT_MESSAGE_TYPE = 2;
-    MessageAdapter(){
 
+    protected MessageAdapter(@NonNull DiffUtil.ItemCallback<Message> diffCallback) {
+        super(diffCallback);
     }
+
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -51,14 +54,13 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public int getItemCount() {
         return messageList.size();
     }
-
+git
     @Override
     public int getItemViewType(int position) {
         return  messageList.get(position).msg_direction;
     }
     public  void  submitList(List<Message> messageList){
         this.messageList = messageList;
-        notifyDataSetChanged();
     }
 
     class  LeftViewHolder extends RecyclerView.ViewHolder{

@@ -30,7 +30,7 @@ public class SingleProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_single_profile);
         Intent intent = getIntent();
         intent.getStringExtra("Firstname");
-        messageAdapter = new MessageAdapter();
+        messageAdapter = new MessageAdapter(Message.itemCallback);
         messageList = new ArrayList<>();
         recyclerView = findViewById(R.id.chatactivity_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
