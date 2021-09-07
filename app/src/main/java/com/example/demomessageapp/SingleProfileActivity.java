@@ -59,6 +59,5 @@ public class SingleProfileActivity extends AppCompatActivity {
                 messageAdapter.submitList(messageList);
             }
         });
-
     }
 }

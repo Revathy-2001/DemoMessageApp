@@ -13,9 +13,8 @@ import java.util.List;
 
 public class MessageAdapter extends ListAdapter<Message,RecyclerView.ViewHolder> {
 
-    List<Message> messageList = new ArrayList<>();
-    LayoutInflater layoutInflater;
-    View view;
+
+
     static final int LEFT_MESSAGE_TYPE = 1;
     static final int RIGHT_MESSAGE_TYPE = 2;
 
@@ -26,12 +25,14 @@ public class MessageAdapter extends ListAdapter<Message,RecyclerView.ViewHolder>
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater layoutInflater;
+        View view;
         switch (viewType){
-            case  1:
+            case  LEFT_MESSAGE_TYPE:
                 layoutInflater = LayoutInflater.from(parent.getContext());
                 view = layoutInflater.inflate(R.layout.receive_message_layout,parent,false);
                 return new LeftViewHolder(view);
-            case  2:
+            case  RIGHT_MESSAGE_TYPE:
                 layoutInflater = LayoutInflater.from(parent.getContext());
                 view = layoutInflater.inflate(R.layout.send_message_layout,parent,false);
                 return new RightViewHolder(view);
@@ -43,24 +44,16 @@ public class MessageAdapter extends ListAdapter<Message,RecyclerView.ViewHolder>
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
       if(holder instanceof LeftViewHolder){
-         ((LeftViewHolder) holder).textView_message.setText(messageList.get(position).messageContent);
+         ((LeftViewHolder) holder).textView_message.setText(getItem(position).messageContent);
       }
-      else if(holder instanceof RightViewHolder){
-          ((RightViewHolder) holder).textView_message.setText(messageList.get(position).messageContent);
+      else{
+          ((RightViewHolder) holder).textView_message.setText(getItem(position).messageContent);
       }
     }
 
     @Override
-    public int getItemCount() {
-        return messageList.size();
-    }
-git
-    @Override
     public int getItemViewType(int position) {
-        return  messageList.get(position).msg_direction;
-    }
-    public  void  submitList(List<Message> messageList){
-        this.messageList = messageList;
+        return  getItem(position).msg_direction;
     }
 
     class  LeftViewHolder extends RecyclerView.ViewHolder{
@@ -70,6 +63,7 @@ git
             textView_message = itemView.findViewById(R.id.receive_message_content);
         }
     }
+
     class  RightViewHolder extends RecyclerView.ViewHolder {
         TextView textView_message;
         public RightViewHolder(@NonNull View itemView) {

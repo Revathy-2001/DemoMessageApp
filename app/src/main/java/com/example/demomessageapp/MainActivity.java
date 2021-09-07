@@ -72,7 +72,6 @@ public class MainActivity extends AppCompatActivity implements PersonClickListen
     @Override
     public void invokeMethod(String firstName) {
         Intent intent = new Intent(this,SingleProfileActivity.class);
-        intent.putExtra("FirstName",firstName);
         startActivity(intent);
     }
 }
