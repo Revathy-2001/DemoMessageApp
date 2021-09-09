@@ -8,11 +8,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.demomessageapp.databinding.ReceiveMessageLayoutBinding;
+import com.example.demomessageapp.databinding.SendMessageLayoutBinding;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class MessageAdapter extends ListAdapter<Message,RecyclerView.ViewHolder> {
-
 
 
     static final int LEFT_MESSAGE_TYPE = 1;
@@ -29,13 +32,15 @@ public class MessageAdapter extends ListAdapter<Message,RecyclerView.ViewHolder>
         View view;
         switch (viewType){
             case  LEFT_MESSAGE_TYPE:
-                layoutInflater = LayoutInflater.from(parent.getContext());
-                view = layoutInflater.inflate(R.layout.receive_message_layout,parent,false);
-                return new LeftViewHolder(view);
+               // layoutInflater = LayoutInflater.from(parent.getContext());
+              //  view = layoutInflater.inflate(R.layout.receive_message_layout,parent,false);
+                ReceiveMessageLayoutBinding receiveMessageLayoutBinding = ReceiveMessageLayoutBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false);
+                return new LeftViewHolder(receiveMessageLayoutBinding);
             case  RIGHT_MESSAGE_TYPE:
-                layoutInflater = LayoutInflater.from(parent.getContext());
-                view = layoutInflater.inflate(R.layout.send_message_layout,parent,false);
-                return new RightViewHolder(view);
+             //   layoutInflater = LayoutInflater.from(parent.getContext());
+            //    view = layoutInflater.inflate(R.layout.send_message_layout,parent,false);
+                SendMessageLayoutBinding sendMessageLayoutBinding = SendMessageLayoutBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false);
+                return new RightViewHolder(sendMessageLayoutBinding);
             default:
                 return null;
         }
@@ -58,17 +63,17 @@ public class MessageAdapter extends ListAdapter<Message,RecyclerView.ViewHolder>
 
     class  LeftViewHolder extends RecyclerView.ViewHolder{
         TextView textView_message;
-        public LeftViewHolder(@NonNull View itemView) {
-            super(itemView);
-            textView_message = itemView.findViewById(R.id.receive_message_content);
+        public LeftViewHolder(@NonNull ReceiveMessageLayoutBinding receivebinding) {
+            super(receivebinding.getRoot());
+            textView_message = receivebinding.receiveMessageContent;
         }
     }
 
     class  RightViewHolder extends RecyclerView.ViewHolder {
         TextView textView_message;
-        public RightViewHolder(@NonNull View itemView) {
-            super(itemView);
-            textView_message = itemView.findViewById(R.id.send_message_content);
+        public RightViewHolder(@NonNull SendMessageLayoutBinding sendBinding) {
+            super(sendBinding.getRoot());
+            textView_message = sendBinding.sendMessageContent;
         }
     }
 }

@@ -41,7 +41,8 @@ public class Message {
     public int hashCode() {
         return Objects.hash(messageContent, msg_direction, message_id);
     }
-        public  static DiffUtil.ItemCallback<Message> itemCallback = new DiffUtil.ItemCallback<Message>() {
+
+    public  static DiffUtil.ItemCallback<Message> itemCallback = new DiffUtil.ItemCallback<Message>() {
         @Override
         public boolean areItemsTheSame(Message oldItem, Message newItem) {
             if(oldItem != null && newItem != null){
@@ -55,7 +56,5 @@ public class Message {
                 return oldItem.equals(newItem);}
             else{  return false;}
         }
-
-
     };
 }

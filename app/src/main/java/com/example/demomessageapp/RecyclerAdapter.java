@@ -1,5 +1,6 @@
 package com.example.demomessageapp;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,21 +10,27 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.demomessageapp.databinding.RowItemBinding;
+
 import java.util.List;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder>{
+
     List<Person> personList;
     PersonClickListener personClickListener;
     public RecyclerAdapter(PersonClickListener personClickListener){
         this.personClickListener = personClickListener;
     }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.row_item,parent,false);
-        ViewHolder viewHolder = new ViewHolder(view);
-        return viewHolder;
+//        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+//        View view = layoutInflater.inflate(R.layout.row_item,parent,false);
+
+        RowItemBinding rowItemBinding = RowItemBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false);
+        Log.e("Parent", String.valueOf(parent));
+        return new ViewHolder(rowItemBinding);
     }
 
     @Override
@@ -47,12 +54,17 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     {
         ImageView imageView;
         TextView textView_firstName,textView_lastName,textView_time;
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            imageView = itemView.findViewById(R.id.profile);
-            textView_firstName = itemView.findViewById(R.id.first_name);
-            textView_lastName = itemView.findViewById(R.id.last_name);
-            textView_time = itemView.findViewById(R.id.time);
+        public ViewHolder(@NonNull RowItemBinding binding) {
+            super(binding.getRoot());
+           // imageView = itemView.findViewById(R.id.profile);
+           // textView_firstName = itemView.findViewById(R.id.first_name);
+           // textView_lastName = itemView.findViewById(R.id.last_name);
+           // textView_time = itemView.findViewById(R.id.time);
+
+            imageView = binding.profile;
+            textView_firstName = binding.firstName;
+            textView_lastName = binding.lastName;
+            textView_time = binding.time;
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

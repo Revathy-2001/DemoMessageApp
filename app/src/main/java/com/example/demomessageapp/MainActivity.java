@@ -1,6 +1,8 @@
 package com.example.demomessageapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,6 +13,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import com.example.demomessageapp.databinding.ActivityMainBinding;
+
 import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -18,55 +22,32 @@ import java.util.Calendar;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements PersonClickListener{
-
+    ActivityMainBinding activityMainBinding;
     RecyclerView recyclerView;
     RecyclerAdapter recyclerAdapter;
-    List<Person> person_details;
-//    Calendar calendar = Calendar.getInstance();
-//    SimpleDateFormat mdformat = new SimpleDateFormat("HH:mm");
-//    String currentTime = "Current Time : " + mdformat.format(calendar.getTime());
+    MainActivityViewModel mainActivityViewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        person_details = new ArrayList<>();
-        recyclerView = findViewById(R.id.recyclerView);
+
+        activityMainBinding = ActivityMainBinding.inflate(getLayoutInflater());
+        View view = activityMainBinding.getRoot();
+        setContentView(view);
+        recyclerView =  activityMainBinding.recyclerView;
         recyclerAdapter = new RecyclerAdapter(this);
-        recyclerAdapter.submitList(person_details);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(recyclerAdapter);
-
+        mainActivityViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
+        mainActivityViewModel.personsLiveData.observe(this, new Observer<List<Person>>() {
+            @Override
+            public void onChanged(List<Person> people) {
+                recyclerAdapter.submitList(people);
+            }
+        });
 
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this,DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(dividerItemDecoration);
-
-        person_details.add(new Person("Aadhya","Krishna",randomTime(1,24)+"."+ randomTime(1,60)));
-        person_details.add(new Person("Ahana","Moorthy",randomTime(1,24)+"."+ randomTime(1,60)));
-        person_details.add(new Person("Aaleyah","Vineet",randomTime(1,24)+"."+ randomTime(1,60)));
-        person_details.add(new Person("Aarya","Kannan",randomTime(1,24)+"."+ randomTime(1,60)));
-        person_details.add(new Person("Advika","Ameet",randomTime(1,24)+"."+ randomTime(1,60)));
-        person_details.add(new Person("Akshara","Moorthi",randomTime(1,24)+"."+ randomTime(1,60)));
-        person_details.add(new Person("Basheera","Begum",randomTime(1,24)+"."+ randomTime(1,60)));
-        person_details.add(new Person("Bhavana","Ravikumar",randomTime(1,24)+"."+ randomTime(1,60)));
-        person_details.add(new Person("Bhakya","Lakshmi",randomTime(1,24)+"."+ randomTime(1,60)));
-        person_details.add(new Person("Brindha","Krishnan",randomTime(1,24)+"."+ randomTime(1,60)));
-        person_details.add(new Person("Charulatha","Ravinarayanan",randomTime(1,24)+"."+ randomTime(1,60)));
-        person_details.add(new Person("Charles","Krish",randomTime(1,24)+"."+ randomTime(1,60)));
-        person_details.add(new Person("David","Ragu",randomTime(1,24)+"."+ randomTime(1,60)));
-        person_details.add(new Person("Dharshitha","Varnan",randomTime(1,24)+"."+ randomTime(1,60)));
-        person_details.add(new Person("Devika","Kannan",randomTime(1,24)+"."+ randomTime(1,60)));
-        person_details.add(new Person("Felina","Raj",randomTime(1,24)+"."+ randomTime(1,60)));
-        person_details.add(new Person("Manisha","Kravel",randomTime(1,24)+"."+ randomTime(1,60)));
-        person_details.add(new Person("Nivetha","Antony",randomTime(1,24)+"."+ randomTime(1,60)));
-        person_details.add(new Person("Swetha","hariharan",randomTime(1,24)+"."+ randomTime(1,60)));
-        person_details.add(new Person("Zaara","Vinneet",randomTime(1,24)+"."+ randomTime(1,60)));
-
-    }
-    public String randomTime(int min,int max){
-        String currentTime = (int)(Math.random()*(max-min+1)+min)+"";
-        if(currentTime.length() == 1)
-            currentTime = "0"+currentTime;
-        return currentTime;
     }
 
     @Override
