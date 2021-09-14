@@ -56,7 +56,7 @@ public class SingleProfileActivity extends AppCompatActivity {
         send_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                editText_message_content = findViewById(R.id.type_box);
+                editText_message_content = activitySingleProfileBinding.typeBox;
                 String message_content = editText_message_content.getText().toString();
                 Message message = new Message(message_content,i++,2);
                 messageList.add(message);
@@ -66,7 +66,7 @@ public class SingleProfileActivity extends AppCompatActivity {
         receive_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                editText_message_content = findViewById(R.id.type_box);
+                editText_message_content = activitySingleProfileBinding.typeBox;
                 String message_content = editText_message_content.getText().toString();
                 Message message = new Message(message_content,i++,1);
                 messageList.add(message);

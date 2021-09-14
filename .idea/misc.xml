@@ -13,7 +13,7 @@
         <entry key="app/src/main/res/drawable/receive_message_border.xml" value="0.15462962962962962" />
         <entry key="app/src/main/res/drawable/send_message_border.xml" value="0.15462962962962962" />
         <entry key="app/src/main/res/drawable/typeboxborder.xml" value="0.16018518518518518" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_single_profile.xml" value="0.25" />
         <entry key="app/src/main/res/layout/receive_message_layout.xml" value="0.25" />
         <entry key="app/src/main/res/layout/row_item.xml" value="0.45" />

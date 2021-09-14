@@ -56,14 +56,3 @@ public class MainActivity extends AppCompatActivity implements PersonClickListen
         startActivity(intent);
     }
 }
-class  Person{
-  public String firstName;
-  public String lastName;
-  public String time;
-
-  Person(String firstName,String lastName,String time){
-      this.firstName = firstName;
-      this.lastName = lastName;
-      this.time = time;
-  }
-}

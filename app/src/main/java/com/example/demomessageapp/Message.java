@@ -52,9 +52,9 @@ public class Message {
 
         @Override
         public boolean areContentsTheSame(Message oldItem, Message newItem) {
-            if(oldItem != null && newItem != null){
-                return oldItem.equals(newItem);}
-            else{  return false;}
+            if(oldItem != null && newItem != null && (oldItem.msg_direction != newItem.msg_direction || oldItem.messageContent != newItem.messageContent) ){
+                return false;}
+            else{  return true;}
         }
     };
 }
