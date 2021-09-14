@@ -1,5 +1,6 @@
 package com.example.demomessageapp;
 
+import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,13 +11,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.demomessageapp.databinding.RowItemBinding;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
-
+    Context context;
     List<Person> personList = new ArrayList<>();
     PersonClickListener personClickListener;
     public RecyclerAdapter(PersonClickListener personClickListener){
@@ -28,6 +30,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             RowItemBinding rowItemBinding = RowItemBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false);
             Log.e("Parent", String.valueOf(parent));
+            context = parent.getContext();
             return new ViewHolder(rowItemBinding);
     }
 
@@ -35,8 +38,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
          ViewHolder h = (ViewHolder)holder;
+         String url = personList.get(position).getAvatar();
          h.textView_firstName.setText(personList.get(position).getFirstName());
          h.textView_lastName.setText(personList.get(position).getLastName());
+        Glide.with(context).load(url).into(h.imageView);
     }
 
     @Override
