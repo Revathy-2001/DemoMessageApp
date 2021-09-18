@@ -32,13 +32,9 @@ public class MessageAdapter extends ListAdapter<Message,RecyclerView.ViewHolder>
         View view;
         switch (viewType){
             case  LEFT_MESSAGE_TYPE:
-               // layoutInflater = LayoutInflater.from(parent.getContext());
-              //  view = layoutInflater.inflate(R.layout.receive_message_layout,parent,false);
                 ReceiveMessageLayoutBinding receiveMessageLayoutBinding = ReceiveMessageLayoutBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false);
                 return new LeftViewHolder(receiveMessageLayoutBinding);
             case  RIGHT_MESSAGE_TYPE:
-             //   layoutInflater = LayoutInflater.from(parent.getContext());
-            //    view = layoutInflater.inflate(R.layout.send_message_layout,parent,false);
                 SendMessageLayoutBinding sendMessageLayoutBinding = SendMessageLayoutBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false);
                 return new RightViewHolder(sendMessageLayoutBinding);
             default:
@@ -77,3 +73,4 @@ public class MessageAdapter extends ListAdapter<Message,RecyclerView.ViewHolder>
         }
     }
 }
+

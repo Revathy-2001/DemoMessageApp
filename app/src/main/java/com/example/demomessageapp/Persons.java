@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 class Person {
-
+    
     @SerializedName("id")
     @Expose
     private Integer id;
@@ -63,6 +63,13 @@ class Person {
         this.avatar = avatar;
     }
 
+    public void setPerson(Integer id,String firstName,String lastName,String email,String avatar) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.avatar = avatar;
+    }
 }
 
 

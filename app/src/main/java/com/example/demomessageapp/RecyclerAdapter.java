@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.example.demomessageapp.databinding.RowItemBinding;
 
 import java.util.ArrayList;
@@ -41,7 +42,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
          String url = personList.get(position).getAvatar();
          h.textView_firstName.setText(personList.get(position).getFirstName());
          h.textView_lastName.setText(personList.get(position).getLastName());
-        Glide.with(context).load(url).into(h.imageView);
+         Glide.with(context).load(url).placeholder(R.drawable.ic_baseline_account_circle_24).transition(DrawableTransitionOptions.withCrossFade(2000)).into(h.imageView);
     }
 
     @Override

@@ -19,34 +19,15 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivityViewModel extends ViewModel {
-    public String result;
-    MutableLiveData<List<Person>> personsLiveData = new MutableLiveData<List<Person>>();
-    Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("https://reqres.in/")
-            .addConverterFactory(GsonConverterFactory.create()).build();
-    ReqresApi reqresApi = retrofit.create(ReqresApi.class);
-    Call<Persons> call = reqresApi.getPersons();
-    public MainActivityViewModel(){
-       loadPersons();
+      MutableLiveData<List<Person>> mutableLiveData;
+
+
+      PersonRepository dataPersonRepository = new DataPersonRepository();
+//      MockPersonRepository mockPersonRepository = new MockPersonRepository();
+      public MainActivityViewModel(){
+          dataPersonRepository.loadPersons();
+//          mockPersonRepository.loadPersons();
+          mutableLiveData = dataPersonRepository.getLiveData();
+//          mutableLiveData = mockPersonRepository.getLiveData();
     }
-    private void loadPersons(){
-        call.enqueue(new Callback<Persons>() {
-
-            @Override
-            public void onResponse(Call<Persons> call, Response<Persons> response) {
-               if(!response.isSuccessful()){
-                   result = "Code: " + response.code();
-                   return;
-               }
-               personsLiveData.postValue(response.body().getData());
-            }
-
-            @Override
-            public void onFailure(Call<Persons> call, Throwable t) {
-               result = t.getMessage();
-            }
-
-        });
-    }
-
 }

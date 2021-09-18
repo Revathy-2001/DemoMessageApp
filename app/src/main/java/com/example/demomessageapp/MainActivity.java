@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements PersonClickListen
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(recyclerAdapter);
         mainActivityViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
-        mainActivityViewModel.personsLiveData.observe(this, new Observer<List<Person>>() {
+        mainActivityViewModel.mutableLiveData.observe(this, new Observer<List<Person>>() {
             @Override
             public void onChanged(List<Person> people) {
                 recyclerAdapter.submitList(people);
