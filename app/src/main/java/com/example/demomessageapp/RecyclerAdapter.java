@@ -43,6 +43,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
          h.textView_firstName.setText(personList.get(position).getFirstName());
          h.textView_lastName.setText(personList.get(position).getLastName());
          Glide.with(context).load(url).placeholder(R.drawable.ic_baseline_account_circle_24).transition(DrawableTransitionOptions.withCrossFade(2000)).into(h.imageView);
+         Log.e("PersonList",String.valueOf(personList.get(position).getId()));
     }
 
     @Override
@@ -54,7 +55,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         this.personList = person;
         notifyDataSetChanged();
     }
-
+    public List<Person> getPersonList(){
+        return personList;
+    }
     class ViewHolder extends RecyclerView.ViewHolder
     {
         ImageView imageView;

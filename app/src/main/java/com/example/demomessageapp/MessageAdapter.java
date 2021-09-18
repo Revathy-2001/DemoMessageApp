@@ -17,7 +17,6 @@ import java.util.List;
 
 public class MessageAdapter extends ListAdapter<Message,RecyclerView.ViewHolder> {
 
-
     static final int LEFT_MESSAGE_TYPE = 1;
     static final int RIGHT_MESSAGE_TYPE = 2;
 
@@ -45,16 +44,16 @@ public class MessageAdapter extends ListAdapter<Message,RecyclerView.ViewHolder>
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
       if(holder instanceof LeftViewHolder){
-         ((LeftViewHolder) holder).textView_message.setText(getItem(position).messageContent);
+            ((LeftViewHolder) holder).textView_message.setText(getItem(position).getMessageContent());
       }
       else{
-          ((RightViewHolder) holder).textView_message.setText(getItem(position).messageContent);
+          ((RightViewHolder) holder).textView_message.setText(getItem(position).getMessageContent());
       }
     }
 
     @Override
     public int getItemViewType(int position) {
-        return  getItem(position).msg_direction;
+        return  getItem(position).getMsg_direction();
     }
 
     class  LeftViewHolder extends RecyclerView.ViewHolder{

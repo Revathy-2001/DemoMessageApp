@@ -1,11 +1,14 @@
 package com.example.demomessageapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -26,6 +29,8 @@ public class SingleProfileActivity extends AppCompatActivity {
     List<Message> messageList;
     ImageButton send_btn,receive_btn;
     EditText editText_message_content;
+    MessageViewModel messageViewModel;
+    RecyclerAdapter recyclerAdapter;
 
     int i = 1;
     @Override
@@ -35,32 +40,31 @@ public class SingleProfileActivity extends AppCompatActivity {
         View view = activitySingleProfileBinding.getRoot();
         setContentView(view);
 
+        messageViewModel = new ViewModelProvider(this).get(MessageViewModel.class);
 
         Intent intent = getIntent();
-        intent.getStringExtra("Firstname");
         messageAdapter = new MessageAdapter(Message.itemCallback);
         messageList = new ArrayList<>();
 
-        //recyclerView = findViewById(R.id.chatactivity_recycler);
         recyclerView = activitySingleProfileBinding.chatactivityRecycler;
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(messageAdapter);
 
-       // send_btn = (ImageButton) findViewById(R.id.send_btn);
         send_btn = activitySingleProfileBinding.sendBtn;
 
-        //receive_btn = (ImageButton) findViewById(R.id.receive_btn);
         receive_btn = activitySingleProfileBinding.receiveBtn;
 
         send_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                Log.e("Recycler_person", String.valueOf(recyclerAdapter.getPersonList()));
                 editText_message_content = activitySingleProfileBinding.typeBox;
                 String message_content = editText_message_content.getText().toString();
-                Message message = new Message(message_content,i++,2);
-                messageList.add(message);
-                messageAdapter.submitList(new ArrayList<Message> (messageList));
+                Log.e("I1", String.valueOf(i));
+                i = i++;
+                Message message = new Message(message_content,i,1,2);
+                messageViewModel.insertMessage(message);
             }
         });
         receive_btn.setOnClickListener(new View.OnClickListener() {
@@ -68,9 +72,17 @@ public class SingleProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
                 editText_message_content = activitySingleProfileBinding.typeBox;
                 String message_content = editText_message_content.getText().toString();
-                Message message = new Message(message_content,i++,1);
-                messageList.add(message);
-                messageAdapter.submitList(new ArrayList<Message>(messageList));
+                Log.e("I2", String.valueOf(i));
+                i = i++;
+                Message message = new Message(message_content,i,1,1);
+                messageViewModel.insertMessage(message);
+            }
+        });
+
+        messageViewModel.getAllMessagesFromDB().observe(this, new Observer<List<Message>>() {
+            @Override
+            public void onChanged(List<Message> messageList) {
+              messageAdapter.submitList(messageList);
             }
         });
     }

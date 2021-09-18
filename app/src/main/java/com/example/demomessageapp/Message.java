@@ -4,19 +4,49 @@ import android.annotation.SuppressLint;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import java.util.Objects;
-
+@Entity(tableName = "messages")
 public class Message {
-    public  String messageContent;
-    public  int msg_direction;
-    public  int message_id;
-    Message(String messageContent,int message_id,int msg_direction){
+
+    @NonNull
+    private   String messageContent;
+
+    @NonNull
+    private  int user_id;
+
+    @NonNull
+    private   int msg_direction;
+
+    @PrimaryKey(autoGenerate = true)
+    @NonNull
+    private int message_id;
+
+    Message(String messageContent,int message_id,int user_id,int msg_direction){
         this.messageContent = messageContent;
-        this.message_id = message_id;
         this.msg_direction = msg_direction;
+        this.user_id = user_id;
+    }
+    public void setMessage_id(int message_id){
+        this.message_id = message_id;
     }
 
+    public String getMessageContent() {
+        return messageContent;
+    }
+
+    public int getMsg_direction() {
+        return msg_direction;
+    }
+
+    public int getMessage_id(){
+        return message_id;
+    }
+    public int getUser_id(){
+        return  user_id;
+    }
     @Override
     public String toString() {
         return "Message{" +
