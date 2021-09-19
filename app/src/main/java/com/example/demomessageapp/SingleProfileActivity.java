@@ -1,12 +1,14 @@
 package com.example.demomessageapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -30,9 +32,14 @@ public class SingleProfileActivity extends AppCompatActivity {
     ImageButton send_btn,receive_btn;
     EditText editText_message_content;
     MessageViewModel messageViewModel;
-    RecyclerAdapter recyclerAdapter;
 
+    Message message = new Message();
+
+//    MutableLiveData<List<Person>> mutableLiveDataPersons;
+//    MainActivityViewModel mainActivityViewModel;
     int i = 1;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,9 +47,15 @@ public class SingleProfileActivity extends AppCompatActivity {
         View view = activitySingleProfileBinding.getRoot();
         setContentView(view);
 
+//        mainActivityViewModel = new MainActivityViewModel();
+//        mutableLiveDataPersons = mainActivityViewModel.mutableLiveData;
+
         messageViewModel = new ViewModelProvider(this).get(MessageViewModel.class);
 
         Intent intent = getIntent();
+        int user_id = intent.getIntExtra("User_id",0);
+        message.setUser_id(user_id);
+        Log.e("user_id", String.valueOf(user_id));
         messageAdapter = new MessageAdapter(Message.itemCallback);
         messageList = new ArrayList<>();
 
@@ -58,12 +71,14 @@ public class SingleProfileActivity extends AppCompatActivity {
         send_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Log.e("Recycler_person", String.valueOf(recyclerAdapter.getPersonList()));
                 editText_message_content = activitySingleProfileBinding.typeBox;
                 String message_content = editText_message_content.getText().toString();
                 Log.e("I1", String.valueOf(i));
                 i = i++;
-                Message message = new Message(message_content,i,1,2);
+                Message message = new Message(i);
+//                message.setMessage_id(i);
+                message.setMessageContent(message_content);
+                message.setMsg_direction(2);
                 messageViewModel.insertMessage(message);
             }
         });
@@ -74,7 +89,10 @@ public class SingleProfileActivity extends AppCompatActivity {
                 String message_content = editText_message_content.getText().toString();
                 Log.e("I2", String.valueOf(i));
                 i = i++;
-                Message message = new Message(message_content,i,1,1);
+                Message message = new Message(i);
+//                message.setMessage_id(i);
+                message.setMessageContent(message_content);
+                message.setMsg_direction(1);
                 messageViewModel.insertMessage(message);
             }
         });

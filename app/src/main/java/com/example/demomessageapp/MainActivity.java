@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity implements PersonClickListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         activityMainBinding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = activityMainBinding.getRoot();
         setContentView(view);
@@ -51,8 +50,9 @@ public class MainActivity extends AppCompatActivity implements PersonClickListen
     }
 
     @Override
-    public void invokeMethod(String firstName) {
+    public void invokeMethod(int id) {
         Intent intent = new Intent(this,SingleProfileActivity.class);
+        intent.putExtra("User_id",id);
         startActivity(intent);
     }
 }

@@ -55,9 +55,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         this.personList = person;
         notifyDataSetChanged();
     }
-    public List<Person> getPersonList(){
-        return personList;
-    }
+
     class ViewHolder extends RecyclerView.ViewHolder
     {
         ImageView imageView;
@@ -71,7 +69,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                  personClickListener.invokeMethod(personList.get(getAdapterPosition()).getFirstName());
+                  personClickListener.invokeMethod(personList.get(getAdapterPosition()).getId());
                 }
             });
         }
@@ -79,5 +77,5 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 }
 interface PersonClickListener{
-    public  void invokeMethod(String firstName);
+    public  void invokeMethod(int id);
 }

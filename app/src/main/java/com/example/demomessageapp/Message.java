@@ -1,6 +1,7 @@
 package com.example.demomessageapp;
 
 import android.annotation.SuppressLint;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
@@ -24,11 +25,31 @@ public class Message {
     @NonNull
     private int message_id;
 
-    Message(String messageContent,int message_id,int user_id,int msg_direction){
-        this.messageContent = messageContent;
-        this.msg_direction = msg_direction;
+    Message(){
+        Log.e("Constructor","Normal Constructor called");
+    }
+    public Message(int user_id) {
         this.user_id = user_id;
     }
+
+    public void setMessageContent(@NonNull String messageContent) {
+        this.messageContent = messageContent;
+    }
+
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
+    }
+
+    public void setMsg_direction(int msg_direction) {
+        this.msg_direction = msg_direction;
+    }
+
+    //    Message(String messageContent,int message_id,int user_id,int msg_direction){
+//        this.messageContent = messageContent;
+//        this.msg_direction = msg_direction;
+//        this.user_id = user_id;
+//    }
     public void setMessage_id(int message_id){
         this.message_id = message_id;
     }
