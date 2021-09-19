@@ -33,7 +33,7 @@ public class SingleProfileActivity extends AppCompatActivity {
     EditText editText_message_content;
     MessageViewModel messageViewModel;
 
-    Message message = new Message();
+    Message message;
 
 //    MutableLiveData<List<Person>> mutableLiveDataPersons;
 //    MainActivityViewModel mainActivityViewModel;
@@ -54,7 +54,9 @@ public class SingleProfileActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         int user_id = intent.getIntExtra("User_id",0);
-        message.setUser_id(user_id);
+
+        message = new Message(i,user_id);
+
         Log.e("user_id", String.valueOf(user_id));
         messageAdapter = new MessageAdapter(Message.itemCallback);
         messageList = new ArrayList<>();
@@ -75,8 +77,6 @@ public class SingleProfileActivity extends AppCompatActivity {
                 String message_content = editText_message_content.getText().toString();
                 Log.e("I1", String.valueOf(i));
                 i = i++;
-                Message message = new Message(i);
-//                message.setMessage_id(i);
                 message.setMessageContent(message_content);
                 message.setMsg_direction(2);
                 messageViewModel.insertMessage(message);
@@ -89,8 +89,6 @@ public class SingleProfileActivity extends AppCompatActivity {
                 String message_content = editText_message_content.getText().toString();
                 Log.e("I2", String.valueOf(i));
                 i = i++;
-                Message message = new Message(i);
-//                message.setMessage_id(i);
                 message.setMessageContent(message_content);
                 message.setMsg_direction(1);
                 messageViewModel.insertMessage(message);

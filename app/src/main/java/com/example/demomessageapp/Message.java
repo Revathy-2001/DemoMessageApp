@@ -28,8 +28,10 @@ public class Message {
     Message(){
         Log.e("Constructor","Normal Constructor called");
     }
-    public Message(int user_id) {
+    public Message(int i,int user_id) {
         this.user_id = user_id;
+        Log.e("Constructor","Parameterized Constructor called");
+
     }
 
     public void setMessageContent(@NonNull String messageContent) {
