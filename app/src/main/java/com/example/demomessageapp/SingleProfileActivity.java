@@ -32,11 +32,9 @@ public class SingleProfileActivity extends AppCompatActivity {
     ImageButton send_btn,receive_btn;
     EditText editText_message_content;
     MessageViewModel messageViewModel;
+    MessageDao messageDao;
 
     Message message;
-
-//    MutableLiveData<List<Person>> mutableLiveDataPersons;
-//    MainActivityViewModel mainActivityViewModel;
     int i = 1;
 
 
@@ -47,16 +45,13 @@ public class SingleProfileActivity extends AppCompatActivity {
         View view = activitySingleProfileBinding.getRoot();
         setContentView(view);
 
-//        mainActivityViewModel = new MainActivityViewModel();
-//        mutableLiveDataPersons = mainActivityViewModel.mutableLiveData;
-
-        messageViewModel = new ViewModelProvider(this).get(MessageViewModel.class);
 
         Intent intent = getIntent();
         int user_id = intent.getIntExtra("User_id",0);
-
         message = new Message(i,user_id);
 
+        messageViewModel = new ViewModelProvider(this).get(MessageViewModel.class);
+        messageViewModel.setUserIdToFetch(user_id);
         Log.e("user_id", String.valueOf(user_id));
         messageAdapter = new MessageAdapter(Message.itemCallback);
         messageList = new ArrayList<>();
@@ -75,11 +70,17 @@ public class SingleProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
                 editText_message_content = activitySingleProfileBinding.typeBox;
                 String message_content = editText_message_content.getText().toString();
-                Log.e("I1", String.valueOf(i));
-                i = i++;
-                message.setMessageContent(message_content);
-                message.setMsg_direction(2);
-                messageViewModel.insertMessage(message);
+                if(message_content.isEmpty()){
+                    editText_message_content.setError("Message can't be sent Empty!!!");
+                    editText_message_content.requestFocus();
+                }
+                else {
+                    Log.e("I1", String.valueOf(i));
+                    i = i++;
+                    message.setMessageContent(message_content);
+                    message.setMsg_direction(2);
+                    messageViewModel.insertMessage(message);
+                }
             }
         });
         receive_btn.setOnClickListener(new View.OnClickListener() {
@@ -87,11 +88,17 @@ public class SingleProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
                 editText_message_content = activitySingleProfileBinding.typeBox;
                 String message_content = editText_message_content.getText().toString();
-                Log.e("I2", String.valueOf(i));
-                i = i++;
-                message.setMessageContent(message_content);
-                message.setMsg_direction(1);
-                messageViewModel.insertMessage(message);
+                if(message_content.isEmpty()){
+                    editText_message_content.setError("Message can't be sent Empty!!!");
+                    editText_message_content.requestFocus();
+                }
+                else {
+                    Log.e("I2", String.valueOf(i));
+                    i = i++;
+                    message.setMessageContent(message_content);
+                    message.setMsg_direction(1);
+                    messageViewModel.insertMessage(message);
+                }
             }
         });
 

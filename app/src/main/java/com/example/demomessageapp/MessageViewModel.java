@@ -10,6 +10,7 @@ import androidx.lifecycle.LiveData;
 import java.util.List;
 
 public class MessageViewModel extends AndroidViewModel {
+    int user_id;
     String className = this.getClass().getSimpleName();
     LiveData<Person> person_list;
     private MessageDao messageDao;
@@ -20,7 +21,10 @@ public class MessageViewModel extends AndroidViewModel {
         super(application);
         messageRoomDatabase = MessageRoomDatabase.getDatabase(application);
         messageDao = messageRoomDatabase.messageDao();
-        messageList = messageDao.getAllMessages();
+    }
+    public void setUserIdToFetch(int user_id){
+        this.user_id = user_id;
+        messageList = messageDao.getAllMessages(user_id);
     }
     public  void  insertMessage(Message message){//wrapper class
       new InsertAsyncTask(messageDao).execute(message);

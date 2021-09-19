@@ -12,6 +12,6 @@ public interface MessageDao {
     @Insert
     void insert(Message message);
 
-    @Query("SELECT * FROM messages ")
-    LiveData<List<Message>> getAllMessages();
+    @Query("SELECT * FROM messages WHERE user_id = :user_id")
+    LiveData<List<Message>> getAllMessages(int user_id);
 }
