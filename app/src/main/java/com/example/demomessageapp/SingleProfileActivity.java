@@ -43,6 +43,7 @@ public class SingleProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         activitySingleProfileBinding = ActivitySingleProfileBinding.inflate(getLayoutInflater());
         View view = activitySingleProfileBinding.getRoot();
+        setTitle("First Name");
         setContentView(view);
 
 
@@ -80,6 +81,7 @@ public class SingleProfileActivity extends AppCompatActivity {
                     message.setMessageContent(message_content);
                     message.setMsg_direction(2);
                     messageViewModel.insertMessage(message);
+                    editText_message_content.setText("");
                 }
             }
         });
@@ -98,6 +100,7 @@ public class SingleProfileActivity extends AppCompatActivity {
                     message.setMessageContent(message_content);
                     message.setMsg_direction(1);
                     messageViewModel.insertMessage(message);
+                    editText_message_content.setText("");
                 }
             }
         });

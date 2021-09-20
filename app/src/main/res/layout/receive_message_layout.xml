@@ -16,6 +16,7 @@
         android:background="@drawable/receive_message_border"
         android:maxWidth="300dp"
         android:padding="10dp"
+        android:textColor="@color/white"
         android:text="sample send message"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
