@@ -34,7 +34,6 @@ public class SingleProfileActivity extends AppCompatActivity {
     MessageViewModel messageViewModel;
     MessageDao messageDao;
 
-    Message message;
     int i = 1;
 
 
@@ -43,13 +42,13 @@ public class SingleProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         activitySingleProfileBinding = ActivitySingleProfileBinding.inflate(getLayoutInflater());
         View view = activitySingleProfileBinding.getRoot();
-        setTitle("First Name");
         setContentView(view);
 
 
         Intent intent = getIntent();
         int user_id = intent.getIntExtra("User_id",0);
-        message = new Message(i,user_id);
+        String name = intent.getStringExtra("Name");
+        setTitle(name);
 
         messageViewModel = new ViewModelProvider(this).get(MessageViewModel.class);
         messageViewModel.setUserIdToFetch(user_id);
@@ -78,8 +77,7 @@ public class SingleProfileActivity extends AppCompatActivity {
                 else {
                     Log.e("I1", String.valueOf(i));
                     i = i++;
-                    message.setMessageContent(message_content);
-                    message.setMsg_direction(2);
+                    Message message = new Message(i,user_id,message_content,2);
                     messageViewModel.insertMessage(message);
                     editText_message_content.setText("");
                 }
@@ -97,8 +95,8 @@ public class SingleProfileActivity extends AppCompatActivity {
                 else {
                     Log.e("I2", String.valueOf(i));
                     i = i++;
-                    message.setMessageContent(message_content);
-                    message.setMsg_direction(1);
+                    Message message = new Message(i,user_id,message_content,2);
+                    messageViewModel.insertMessage(message);
                     messageViewModel.insertMessage(message);
                     editText_message_content.setText("");
                 }

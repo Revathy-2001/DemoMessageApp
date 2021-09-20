@@ -69,7 +69,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                  personClickListener.invokeMethod(personList.get(getAdapterPosition()).getId());
+                  personClickListener.invokeMethod(personList.get(getAdapterPosition()).getId(),personList.get(getAdapterPosition()).getFirstName());
                 }
             });
         }
@@ -77,5 +77,5 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 }
 interface PersonClickListener{
-    public  void invokeMethod(int id);
+    public  void invokeMethod(int id,String name);
 }
