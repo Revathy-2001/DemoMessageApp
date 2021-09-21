@@ -2,15 +2,15 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/chat_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/chat_background"
     tools:context=".SingleProfileActivity">
 
     <EditText
         android:id="@+id/type_box"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="225dp"
+        android:layout_height="49dp"
         android:layout_marginStart="8dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/typeboxborder"
@@ -20,7 +20,6 @@
         android:minHeight="48dp"
         android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/send_btn"
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -40,31 +39,35 @@
         android:id="@+id/receive_btn"
         android:layout_width="54dp"
         android:layout_height="54dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/typeboxborder"
+        android:contentDescription="Receive Button"
+        app:layout_constraintBottom_toBottomOf="@+id/send_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/send_btn"
         app:layout_constraintTop_toTopOf="@+id/send_btn"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/ic_receive_icon_foreground"
-        android:background="@drawable/typeboxborder"/>
+        app:srcCompat="@drawable/ic_receive_icon_foreground" />
 
     <ImageButton
         android:id="@+id/send_btn"
         android:layout_width="54dp"
         android:layout_height="54dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:contentDescription="Send Button"
         app:layout_constraintEnd_toStartOf="@+id/receive_btn"
         app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/gallery_icon"
+        app:layout_constraintTop_toTopOf="@+id/gallery_icon"
+        app:srcCompat="@drawable/ic_send_icon_foreground" />
+
+    <ImageView
+        android:id="@+id/gallery_icon"
+        android:layout_width="54dp"
+        android:layout_height="54dp"
+        android:contentDescription="Gallery Icon"
+        app:layout_constraintEnd_toStartOf="@+id/send_btn"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/type_box"
-        app:layout_constraintTop_toBottomOf="@+id/chatactivity_recycler"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/ic_send_icon_foreground"
-        />
+        app:layout_constraintTop_toTopOf="@+id/type_box"
+        app:srcCompat="@android:drawable/ic_menu_gallery" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

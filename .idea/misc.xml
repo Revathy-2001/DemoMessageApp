@@ -14,11 +14,14 @@
         <entry key="app/src/main/res/drawable/send_message_border.xml" value="0.15462962962962962" />
         <entry key="app/src/main/res/drawable/typeboxborder.xml" value="0.16018518518518518" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_photos.xml" value="0.13221884498480244" />
         <entry key="app/src/main/res/layout/activity_single_profile.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/photos_activity.xml" value="0.13221884498480244" />
         <entry key="app/src/main/res/layout/receive_message_layout.xml" value="0.25" />
         <entry key="app/src/main/res/layout/row_item.xml" value="0.45" />
         <entry key="app/src/main/res/layout/sample.xml" value="0.21603260869565216" />
         <entry key="app/src/main/res/layout/send_message_layout.xml" value="0.16168478260869565" />
+        <entry key="app/src/main/res/layout/single_image_item.xml" value="0.13221884498480244" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.16296296296296298" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.16296296296296298" />
       </map>

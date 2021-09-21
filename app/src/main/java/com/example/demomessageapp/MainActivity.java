@@ -7,14 +7,24 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.ContextWrapper;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.example.demomessageapp.databinding.ActivityMainBinding;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -26,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements PersonClickListen
     RecyclerView recyclerView;
     RecyclerAdapter recyclerAdapter;
     MainActivityViewModel mainActivityViewModel;
+    Bitmap bitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +63,10 @@ public class MainActivity extends AppCompatActivity implements PersonClickListen
     @Override
     public void invokeMethod(int id,String name) {
         Intent intent = new Intent(this,SingleProfileActivity.class);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra("User_id",id);
         intent.putExtra("Name",name);
         startActivity(intent);
     }
+
 }

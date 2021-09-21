@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import com.example.demomessageapp.databinding.ActivityMainBinding;
 import com.example.demomessageapp.databinding.ActivitySingleProfileBinding;
@@ -43,7 +44,14 @@ public class SingleProfileActivity extends AppCompatActivity {
         activitySingleProfileBinding = ActivitySingleProfileBinding.inflate(getLayoutInflater());
         View view = activitySingleProfileBinding.getRoot();
         setContentView(view);
-
+        ImageView imageView = activitySingleProfileBinding.galleryIcon;
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SingleProfileActivity.this,PhotosActivity.class);
+                startActivity(intent);
+            }
+        });
 
         Intent intent = getIntent();
         int user_id = intent.getIntExtra("User_id",0);
@@ -95,7 +103,7 @@ public class SingleProfileActivity extends AppCompatActivity {
                 else {
                     Log.e("I2", String.valueOf(i));
                     i = i++;
-                    Message message = new Message(i,user_id,message_content,2);
+                    Message message = new Message(i,user_id,message_content,1);
                     messageViewModel.insertMessage(message);
                     messageViewModel.insertMessage(message);
                     editText_message_content.setText("");
