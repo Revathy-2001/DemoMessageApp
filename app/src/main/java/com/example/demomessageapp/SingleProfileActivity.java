@@ -1,5 +1,6 @@
 package com.example.demomessageapp;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -34,7 +36,8 @@ public class SingleProfileActivity extends AppCompatActivity {
     EditText editText_message_content;
     MessageViewModel messageViewModel;
     MessageDao messageDao;
-
+    String send_to_name;
+    private  static final int GALLERY_REQUEST_CODE = 123;
     int i = 1;
 
 
@@ -44,18 +47,26 @@ public class SingleProfileActivity extends AppCompatActivity {
         activitySingleProfileBinding = ActivitySingleProfileBinding.inflate(getLayoutInflater());
         View view = activitySingleProfileBinding.getRoot();
         setContentView(view);
-        ImageView imageView = activitySingleProfileBinding.galleryIcon;
-        imageView.setOnClickListener(new View.OnClickListener() {
+
+        ImageView galleryIcon = activitySingleProfileBinding.galleryIcon;
+        galleryIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SingleProfileActivity.this,PhotosActivity.class);
-                startActivity(intent);
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent,"Pick an images"),GALLERY_REQUEST_CODE);
             }
         });
+
+
+
+
 
         Intent intent = getIntent();
         int user_id = intent.getIntExtra("User_id",0);
         String name = intent.getStringExtra("Name");
+        send_to_name = name;
         setTitle(name);
 
         messageViewModel = new ViewModelProvider(this).get(MessageViewModel.class);
@@ -117,5 +128,16 @@ public class SingleProfileActivity extends AppCompatActivity {
               messageAdapter.submitList(messageList);
             }
         });
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == GALLERY_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
+            Uri image_uri = data.getData();
+            Intent intent = new Intent(this, SendPhotoActivity.class);
+            intent.putExtra("image-uri", image_uri.toString());
+            intent.putExtra("ReceiverName",send_to_name);
+            startActivity(intent);
+        }
     }
 }

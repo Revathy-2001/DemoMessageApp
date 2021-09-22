@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.16296296296296298" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.11203703703703703" />
         <entry key="app/src/main/res/drawable/ic_receive_icon_background.xml" value="0.2675925925925926" />
         <entry key="app/src/main/res/drawable/ic_receive_icon_foreground.xml" value="0.19722222222222222" />
         <entry key="app/src/main/res/drawable/ic_send_background.xml" value="0.2675925925925926" />
@@ -15,6 +16,7 @@
         <entry key="app/src/main/res/drawable/typeboxborder.xml" value="0.16018518518518518" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_photos.xml" value="0.13221884498480244" />
+        <entry key="app/src/main/res/layout/activity_send_photo.xml" value="0.14628623188405798" />
         <entry key="app/src/main/res/layout/activity_single_profile.xml" value="0.25" />
         <entry key="app/src/main/res/layout/photos_activity.xml" value="0.13221884498480244" />
         <entry key="app/src/main/res/layout/receive_message_layout.xml" value="0.25" />

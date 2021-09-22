@@ -3,7 +3,7 @@
     package="com.example.demomessageapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
@@ -13,6 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DemoMessageApp">
+        <activity
+            android:name=".SendPhotoActivity"
+            android:exported="true" />
         <activity
             android:name=".PhotosActivity"
             android:exported="true" />
