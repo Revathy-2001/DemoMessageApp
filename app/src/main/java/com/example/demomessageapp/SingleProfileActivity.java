@@ -37,6 +37,7 @@ public class SingleProfileActivity extends AppCompatActivity {
     MessageViewModel messageViewModel;
     MessageDao messageDao;
     String send_to_name;
+    int user_id;
     private  static final int GALLERY_REQUEST_CODE = 123;
     int i = 1;
 
@@ -60,11 +61,8 @@ public class SingleProfileActivity extends AppCompatActivity {
         });
 
 
-
-
-
         Intent intent = getIntent();
-        int user_id = intent.getIntExtra("User_id",0);
+        user_id = intent.getIntExtra("User_id",0);
         String name = intent.getStringExtra("Name");
         send_to_name = name;
         setTitle(name);
@@ -78,6 +76,7 @@ public class SingleProfileActivity extends AppCompatActivity {
         recyclerView = activitySingleProfileBinding.chatactivityRecycler;
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
         recyclerView.setAdapter(messageAdapter);
 
         send_btn = activitySingleProfileBinding.sendBtn;
@@ -96,7 +95,7 @@ public class SingleProfileActivity extends AppCompatActivity {
                 else {
                     Log.e("I1", String.valueOf(i));
                     i = i++;
-                    Message message = new Message(i,user_id,message_content,2);
+                    Message message = new Message(i,user_id,message_content,2,null);
                     messageViewModel.insertMessage(message);
                     editText_message_content.setText("");
                 }
@@ -114,9 +113,9 @@ public class SingleProfileActivity extends AppCompatActivity {
                 else {
                     Log.e("I2", String.valueOf(i));
                     i = i++;
-                    Message message = new Message(i,user_id,message_content,1);
+                    Message message = new Message(i,user_id,message_content,1,null);
                     messageViewModel.insertMessage(message);
-                    messageViewModel.insertMessage(message);
+//                    recyclerView.scrollToPosition(messageList.size() - 1);
                     editText_message_content.setText("");
                 }
             }
@@ -137,6 +136,8 @@ public class SingleProfileActivity extends AppCompatActivity {
             Intent intent = new Intent(this, SendPhotoActivity.class);
             intent.putExtra("image-uri", image_uri.toString());
             intent.putExtra("ReceiverName",send_to_name);
+            intent.putExtra("User_id",user_id);
+            intent.putExtra("I",i);
             startActivity(intent);
         }
     }

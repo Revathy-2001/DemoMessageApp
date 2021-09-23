@@ -12,7 +12,6 @@ import java.util.Objects;
 @Entity(tableName = "messages")
 public class Message {
 
-    @NonNull
     private   String messageContent;
 
     @NonNull
@@ -25,19 +24,24 @@ public class Message {
     @NonNull
     private int message_id;
 
+    private String image_uri;
+
     Message(){
         Log.e("Constructor","Normal Constructor called");
     }
-    public Message(int i,int user_id,String messageContent,int msg_direction) {
+    public Message(int i,int user_id,String messageContent,int msg_direction,String image_uri) {
         this.user_id = user_id;
         this.messageContent = messageContent;
         this.msg_direction = msg_direction;
     }
 
-    public void setMessageContent(@NonNull String messageContent) {
+    public void setMessageContent(String messageContent) {
         this.messageContent = messageContent;
     }
 
+    public void setImage_uri(String image_uri){
+        this.image_uri = image_uri;
+    }
 
     public void setUser_id(int user_id) {
         this.user_id = user_id;
@@ -70,6 +74,7 @@ public class Message {
     public int getUser_id(){
         return  user_id;
     }
+    public String getImage_uri(){return  image_uri;}
     @Override
     public String toString() {
         return "Message{" +
